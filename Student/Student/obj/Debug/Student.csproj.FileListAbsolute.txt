@@ -1,0 +1,13 @@
+C:\Users\Wolf\source\repos\Student\Student\bin\Debug\Database1.mdf
+C:\Users\Wolf\source\repos\Student\Student\bin\Debug\Database1_log.ldf
+C:\Users\Wolf\source\repos\Student\Student\bin\Debug\Student.exe.config
+C:\Users\Wolf\source\repos\Student\Student\bin\Debug\Student.exe
+C:\Users\Wolf\source\repos\Student\Student\bin\Debug\Student.pdb
+C:\Users\Wolf\source\repos\Student\Student\obj\Debug\Student.csprojAssemblyReference.cache
+C:\Users\Wolf\source\repos\Student\Student\obj\Debug\Student.Form1.resources
+C:\Users\Wolf\source\repos\Student\Student\obj\Debug\Student.Properties.Resources.resources
+C:\Users\Wolf\source\repos\Student\Student\obj\Debug\Student.csproj.GenerateResource.cache
+C:\Users\Wolf\source\repos\Student\Student\obj\Debug\Student.csproj.CoreCompileInputs.cache
+C:\Users\Wolf\source\repos\Student\Student\obj\Debug\Student.exe
+C:\Users\Wolf\source\repos\Student\Student\obj\Debug\Student.pdb
+C:\Users\Wolf\source\repos\Student\Student\obj\Debug\Student.Insert.resources
