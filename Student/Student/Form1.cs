@@ -27,11 +27,11 @@ namespace Student
             string userName = textBox1.Text;
             DataSet ds = new DataSet();
             conn.Open();
-            SqlCommand cmd = new SqlCommand("select * from Log where Username='"+pass+"'and Pass='"+userName+"'",conn);
+            SqlCommand cmd = new SqlCommand("select * from Log where Username='" + pass + "'and Pass='" + userName + "'", conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(ds);
             conn.Close();
-            if(ds.Tables[0].Rows.Count >0)
+            if (ds.Tables[0].Rows.Count > 0)
             {
                 this.Hide();
                 Insert ins = new Insert();

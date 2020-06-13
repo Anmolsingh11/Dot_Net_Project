@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data.Sql;
 using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace Student
 {
@@ -22,42 +23,84 @@ namespace Student
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Regex rEmail = new Regex("[a-zA-Z0-9_+&*-]+(?:\\." +
+                            "[a-zA-Z0-9_+&*-]+)*@" +
+                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                            "A-Z]{2,7}$");
+            Regex rPhone = new Regex("^[0-9]");
+            if (!rEmail.IsMatch(textBox3.Text))
+            {
+                MessageBox.Show("Please Enter a Valid Email");
+                return;
+            }
+            if(!rPhone.IsMatch(textBox2.Text))
+            {
+                MessageBox.Show("Please Enter a Valid Phone Number");
+                return;
+            }
+            
             if (string.IsNullOrEmpty(textBox1.Text))
             {
-                MessageBox.Show("PLease Insert Data","Failed",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("PLease Insert Name","Failed",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 textBox1.Focus();
                 return;
             }
-            if (textBox2.MaxLength > 10)
+            if (textBox2.Text.Length > 10)
             {
                 MessageBox.Show("phone NO length must be 10", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (string.IsNullOrEmpty(textBox2.Text))
             {
-                MessageBox.Show("PLease Insert Data", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("PLease Insert Phone Number", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (string.IsNullOrEmpty(textBox3.Text))
             {
-                MessageBox.Show("PLease Insert Data", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("PLease Insert Email", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (string.IsNullOrEmpty(textBox4.Text))
             {
-                MessageBox.Show("PLease Insert Data", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("PLease Insert Adrress", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (string.IsNullOrEmpty(textBox5.Text))
             {
-                MessageBox.Show("PLease Insert Data", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("PLease Insert Course", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (string.IsNullOrEmpty(textBox6.Text))
             {
-                MessageBox.Show("PLease Insert Data", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Student id can not be empty", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            SqlConnection CO = new SqlConnection(ConfigurationManager.ConnectionStrings["Log"].ConnectionString);
+            CO.Open();
+            SqlCommand cm = CO.CreateCommand();
+            cm.CommandText = "select * from insertion where name='" + textBox1.Text + "'";
+            SqlDataReader rd = cm.ExecuteReader();
+            while (rd.Read())
+            {
+                if (rd[1].ToString() == textBox1.Text)
+                {
+                    MessageBox.Show("Name Already Exists!!!");
+                    return;
+                }
+                else if (rd[2].ToString() == textBox2.Text)
+                {
+                    MessageBox.Show("Phone number already exists");
+                    return;
+                }
+                else if (rd[3].ToString() == textBox3.Text)
+                {
+                    MessageBox.Show("Email id  already exists");
+                    return;
+                }
+            }
+
+
+
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["Log"].ConnectionString);
             con.Open();
             SqlCommand cmd = con.CreateCommand();
@@ -74,6 +117,7 @@ namespace Student
                 MessageBox.Show("Problem occured try again!!!");
             }
         }
+       
         public void DisplayData()
         {
             DataTable dt = new DataTable();
@@ -118,7 +162,7 @@ namespace Student
             SqlConnection Con = new SqlConnection(ConfigurationManager.ConnectionStrings["Log"].ConnectionString);
             Con.Open();
             SqlCommand cmd = Con.CreateCommand();
-            cmd.CommandText = "update insertion set Name='"+textBox1.Text+"'where Stud_id='"+textBox6.Text+"'";
+            cmd.CommandText = "update insertion set Name='"+textBox1.Text+"', Phone='"+textBox2.Text+"', Email='"+textBox3.Text+"', Address='"+textBox4.Text+"', Course='"+textBox5.Text +"'where Stud_id='"+textBox6.Text+"'";
              int Result= cmd.ExecuteNonQuery();
             if (Result == 1)
             {
