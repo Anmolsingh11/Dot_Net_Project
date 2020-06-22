@@ -1,2 +1,2 @@
 # Dot_Net_Project
-This is a window applicationn designed in the Visual Studio Using C# programming language.
+This is a window application designed in the Visual Studio Using C# programming language.
